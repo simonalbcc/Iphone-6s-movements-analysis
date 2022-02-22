@@ -2,6 +2,6 @@
 
 void main(void) {
 
-	printf("Salut toi mec comment vas tu"); 
+	printf("Salut toi mec comment vas tu aujourd'hui"); 
 
 }
