@@ -1,21 +1,13 @@
 ﻿  Main.c
-C:\Users\simon\Desktop\GitHub\AlbicoccoS_DeWinterA\Project\Project\Main.c(70,14): warning C4477: 'fprintf' : la chaîne de format '%d' nécessite un argument de type 'int', mais l'argument variadique 1 est de type 'int *'
-C:\Users\simon\Desktop\GitHub\AlbicoccoS_DeWinterA\Project\Project\Main.c(70,14): warning C4313: 'fprintf' : '%d' dans la chaîne de format est en conflit avec l'argument 1 de type 'int *'.
-C:\Users\simon\Desktop\GitHub\AlbicoccoS_DeWinterA\Project\Project\Main.c(70,14): warning C4477: 'fprintf' : la chaîne de format '%d' nécessite un argument de type 'int', mais l'argument variadique 2 est de type 'int *'
-C:\Users\simon\Desktop\GitHub\AlbicoccoS_DeWinterA\Project\Project\Main.c(70,14): warning C4313: 'fprintf' : '%d' dans la chaîne de format est en conflit avec l'argument 2 de type 'int *'.
-C:\Users\simon\Desktop\GitHub\AlbicoccoS_DeWinterA\Project\Project\Main.c(70,14): warning C4477: 'fprintf' : la chaîne de format '%d' nécessite un argument de type 'int', mais l'argument variadique 3 est de type 'int *'
-C:\Users\simon\Desktop\GitHub\AlbicoccoS_DeWinterA\Project\Project\Main.c(70,14): warning C4313: 'fprintf' : '%d' dans la chaîne de format est en conflit avec l'argument 3 de type 'int *'.
-C:\Users\simon\Desktop\GitHub\AlbicoccoS_DeWinterA\Project\Project\Main.c(73,15): warning C4477: 'fprintf' : la chaîne de format '%f' nécessite un argument de type 'double', mais l'argument variadique 1 est de type 'float *'
-C:\Users\simon\Desktop\GitHub\AlbicoccoS_DeWinterA\Project\Project\Main.c(94,22): warning C4047: 'fonction' : les niveaux d'indirection de 'int *' et de 'int (*)[24]' sont différents
-C:\Users\simon\Desktop\GitHub\AlbicoccoS_DeWinterA\Project\Project\Main.c(94,15): warning C4024: 'gendersArray' : types différents pour le paramètre formel et réel 1
-C:\Users\simon\Desktop\GitHub\AlbicoccoS_DeWinterA\Project\Project\Main.c(104,40): warning C4047: '=' : les niveaux d'indirection de 'char' et de 'char [20]' sont différents
-C:\Users\simon\Desktop\GitHub\AlbicoccoS_DeWinterA\Project\Project\Main.c(105,38): warning C4047: 'fonction' : les niveaux d'indirection de 'const char *' et de 'size_t' sont différents
-C:\Users\simon\Desktop\GitHub\AlbicoccoS_DeWinterA\Project\Project\Main.c(105,21): warning C4024: 'strcat' : types différents pour le paramètre formel et réel 2
-C:\Users\simon\Desktop\GitHub\AlbicoccoS_DeWinterA\Project\Project\Main.c(105,45): warning C4020: 'strcat' : paramètres réels trop nombreux
-C:\Users\simon\Desktop\GitHub\AlbicoccoS_DeWinterA\Project\Project\Main.c(107,41): warning C4047: 'fonction' : les niveaux d'indirection de 'const char *' et de 'char' sont différents
-C:\Users\simon\Desktop\GitHub\AlbicoccoS_DeWinterA\Project\Project\Main.c(107,38): warning C4024: 'strcmp' : types différents pour le paramètre formel et réel 1
-C:\Users\simon\Desktop\GitHub\AlbicoccoS_DeWinterA\Project\Project\Main.c(107,59): warning C4047: 'fonction' : les niveaux d'indirection de 'const char *' et de 'char' sont différents
-C:\Users\simon\Desktop\GitHub\AlbicoccoS_DeWinterA\Project\Project\Main.c(107,56): warning C4024: 'strcmp' : types différents pour le paramètre formel et réel 2
-C:\Users\simon\Desktop\GitHub\AlbicoccoS_DeWinterA\Project\Project\Main.c(117,51): warning C4047: 'fonction' : les niveaux d'indirection de 'const char *' et de 'int' sont différents
-C:\Users\simon\Desktop\GitHub\AlbicoccoS_DeWinterA\Project\Project\Main.c(117,48): warning C4024: 'strcat_s' : types différents pour le paramètre formel et réel 3
-C:\Users\simon\Desktop\GitHub\AlbicoccoS_DeWinterA\Project\Project\Main.c(105,3): error C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\simon\Desktop\GitHub\AlbicoccoS_DeWinterA\Project\Project\Main.c(138,42): warning C4047: 'fonction' : les niveaux d'indirection de 'const char *' et de 'char' sont différents
+C:\Users\simon\Desktop\GitHub\AlbicoccoS_DeWinterA\Project\Project\Main.c(138,39): warning C4024: 'strcmp' : types différents pour le paramètre formel et réel 1
+C:\Users\simon\Desktop\GitHub\AlbicoccoS_DeWinterA\Project\Project\Main.c(138,62): warning C4047: 'fonction' : les niveaux d'indirection de 'const char *' et de 'char' sont différents
+C:\Users\simon\Desktop\GitHub\AlbicoccoS_DeWinterA\Project\Project\Main.c(138,59): warning C4024: 'strcmp' : types différents pour le paramètre formel et réel 2
+C:\Users\simon\Desktop\GitHub\AlbicoccoS_DeWinterA\Project\Project\Main.c(147,90): warning C4047: 'fonction' : les niveaux d'indirection de 'const char *' et de 'errno_t' sont différents
+C:\Users\simon\Desktop\GitHub\AlbicoccoS_DeWinterA\Project\Project\Main.c(147,51): warning C4024: 'strcpy_s' : types différents pour le paramètre formel et réel 3
+C:\Users\simon\Desktop\GitHub\AlbicoccoS_DeWinterA\Project\Project\Main.c(148,90): warning C4047: 'fonction' : les niveaux d'indirection de 'const char *' et de 'int' sont différents
+C:\Users\simon\Desktop\GitHub\AlbicoccoS_DeWinterA\Project\Project\Main.c(148,87): warning C4024: 'strcat_s' : types différents pour le paramètre formel et réel 3
+C:\Users\simon\Desktop\GitHub\AlbicoccoS_DeWinterA\Project\Project\Main.c(148,91): warning C4047: 'fonction' : les niveaux d'indirection de 'const char *' et de 'errno_t' sont différents
+C:\Users\simon\Desktop\GitHub\AlbicoccoS_DeWinterA\Project\Project\Main.c(148,51): warning C4024: 'strcpy_s' : types différents pour le paramètre formel et réel 3
+C:\Users\simon\Desktop\GitHub\AlbicoccoS_DeWinterA\Project\Project\Main.c(163,46): warning C4244: '=' : conversion de 'double' en 'float', perte possible de données
+  Project.vcxproj -> C:\Users\simon\Desktop\GitHub\AlbicoccoS_DeWinterA\Project\x64\Debug\Project.exe
