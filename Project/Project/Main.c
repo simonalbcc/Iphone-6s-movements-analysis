@@ -81,10 +81,11 @@ void gendersArray(int subjectsGender[]) {
 
 }
 void writeLineInFile(Movement movementToWrite, FILE* fi){
-	fprintf(fi, "\n,%d,%d,%d", movementToWrite.name,movementToWrite.gender,movementToWrite.index);
+	fprintf(fi, "\n%d,%d,%d,", movementToWrite.name,movementToWrite.gender,movementToWrite.index+1);
 	int iVAcc = 0;
-	while(movementToWrite.vAcc[iVAcc] != 0.0){
+	while(movementToWrite.vAcc[iVAcc] != 0 && iVAcc < 600){
 		fprintf(fi, "%f", movementToWrite.vAcc[iVAcc]);
+		iVAcc++;
 	}
 }
 void writeLine(Movement movementToWrite, int iTest, int iSub,FILE* fiTrain, FILE* fiTest) {
@@ -92,6 +93,11 @@ void writeLine(Movement movementToWrite, int iTest, int iSub,FILE* fiTrain, FILE
 		writeLineInFile(movementToWrite, fiTest);
 	}else{
 		writeLineInFile(movementToWrite, fiTrain);
+	}
+}
+void freeString(char string[], int length) {
+	for (int iChar = 0; iChar < length; iChar++) {
+		string[iChar] = '\0'; 
 	}
 }
 void generationFile() {
@@ -108,22 +114,20 @@ void generationFile() {
 */
 
 
-	char paths[NB_DIR][7] = { "dw_1", "dw_2", "dw_11", "jog_9", "jog_16", "sit_5", "sit_13", "std_6",
+	char paths[NB_DIR][7] = { "dws_1", "dws_2", "dws_11", "jog_9", "jog_16", "sit_5", "sit_13", "std_6",
 								   "std_14", "ups_3", "ups_4", "ups_12", "wlk_7", "wlk_8", "wlk_15" };
 	char pathFiSub[40];
-	char pathFiMvt[33];
 
 	int people[24];
 	gendersArray(people);
 
 	FILE* fi;
 	char line[SIZE_LINE];
-	MovementRead movementRead;
+	char number[10];
 
+	MovementRead movementRead;
 	Movement movementToWrite; 
 
-	int iMovement = 0;
-	int iSub = 0;
 	int iMvt = 0;
 	int iTest = 1;
 	int iIndex = 0;
@@ -131,30 +135,30 @@ void generationFile() {
 
 	// première boucle sur l'ensemble des dossiers 
 	while (iDir < 15) {
-		strcpy_s(pathFiSub, sizeof(pathFiSub), "A_DeviceMotionData/");
-
-		strcat_s(pathFiSub, sizeof(pathFiSub), paths[iDir]);
+		int iSub = 0;
+		printf("Je suis dans le numero %d\n", iDir + 1);
 		// vérifier si on est toujours dans le même mouvement 
-		if (iDir < 13 && (strcmp(paths[iDir][1], paths[iDir + 1][1]) != 0)) {
+		if (iDir < 13 && (paths[iDir][1] != paths[iDir + 1][1])) {
 			iMvt++;
 		}
 		movementToWrite.name = iMvt;
 		// première boucle sur l'ensemble des fichiers d'un dossier  
 		while (iSub < NB_SUBJECTS) {
+			printf("\t- Je suis dans le sub %d\n", iSub+1); 
 			movementToWrite.gender = people[iSub];
 			movementToWrite.index = iIndex;
 			// crée le chemin pour le fichier à utiliser 
-			strcpy_s(pathFiSub, sizeof(pathFiSub), strcat_s(pathFiSub, sizeof(pathFiSub), "/sub_"));
-			strcpy_s(pathFiSub, sizeof(pathFiSub), strcat_s(pathFiMvt, sizeof(pathFiMvt), iSub + 1));
-
-			fopen_s(&fi, pathFiMvt, "r");
+			sprintf_s(pathFiSub, sizeof(pathFiSub), "A_DeviceMotion_data/%s/sub_%d.csv", paths[iDir], iSub + 1); ;
+			
+			fopen_s(&fi, pathFiSub, "r+");
 			if (fi == NULL) {
 				printf("Erreur a l'ouverture du fichier ! ici");
 			}
 			else {
+				//lire ligne d'entête
+				fgets(line, SIZE_LINE, fi);
+				int iMovement = 0;
 				while (!feof(fi)) {
-					//lire ligne d'entête
-					fgets(line, SIZE_LINE, fi);
 					//lecture du genre de chaque ligne
 					fgets(line, SIZE_LINE, fi);           
 					sscanf_s(line, "%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f", &movementRead.attitudeRoll, &movementRead.attitudePitch, &movementRead.attitudeYaw, &movementRead.gravityX, &movementRead.gravityY, &movementRead.gravityZ, &movementRead.rotationRX, &movementRead.rotationRY, &movementRead.rotationRZ, &movementRead.userAccX, &movementRead.userAccY, &movementRead.userAccZ); 
@@ -162,30 +166,32 @@ void generationFile() {
 						if (sscanf_s(line, "%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f,%f", &movementRead.attitudeRoll, &movementRead.attitudePitch, &movementRead.attitudeYaw, &movementRead.gravityX, &movementRead.gravityY, &movementRead.gravityZ, &movementRead.rotationRX, &movementRead.rotationRY, &movementRead.rotationRZ, &movementRead.userAccX, &movementRead.userAccY, &movementRead.userAccZ) == 12) {
 							movementToWrite.vAcc[iMovement] = sqrt((pow(movementRead.userAccX, 2) + pow(movementRead.userAccY, 2) + pow(movementRead.userAccZ, 2)));
 							iMovement++;
-							fgets(line, SIZE_LINE, fi);
 						}
+						fgets(line, SIZE_LINE, fi);
 					}
 					// cas où le nombre de mouvements dispo est < que 600
 					while (iMovement < 600) {
 						movementToWrite.vAcc[iMovement] = 0;
 						iMovement++; 
 					}
-					writeLine(movementToWrite, iTest, iSub, fiTrain, fiTest); 
-						iSub++;
-					iIndex++;
+					iMovement = 0; 
 				}
-
-				if (iTest == 23) {
-					iTest = 1;
-				}
-				else {
-					iTest += 2;
-				}
-
-				iDir++;
+				writeLine(movementToWrite, iTest, iSub, fiTrain, fiTest);
+				freeString(pathFiSub, sizeof(pathFiSub));
+				iSub++;
+				iIndex++;
 			}
 		}
+		if (iTest == 23) {
+			iTest = 1;
+		}
+		else {
+			iTest += 2;
+		}
+		iDir++;
 	}
+	fclose(fiTrain);
+	fclose(fiTest);
 }
 
 

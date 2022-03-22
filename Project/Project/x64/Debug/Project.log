@@ -1,13 +1,4 @@
 ﻿  Main.c
-C:\Users\simon\Desktop\GitHub\AlbicoccoS_DeWinterA\Project\Project\Main.c(138,42): warning C4047: 'fonction' : les niveaux d'indirection de 'const char *' et de 'char' sont différents
-C:\Users\simon\Desktop\GitHub\AlbicoccoS_DeWinterA\Project\Project\Main.c(138,39): warning C4024: 'strcmp' : types différents pour le paramètre formel et réel 1
-C:\Users\simon\Desktop\GitHub\AlbicoccoS_DeWinterA\Project\Project\Main.c(138,62): warning C4047: 'fonction' : les niveaux d'indirection de 'const char *' et de 'char' sont différents
-C:\Users\simon\Desktop\GitHub\AlbicoccoS_DeWinterA\Project\Project\Main.c(138,59): warning C4024: 'strcmp' : types différents pour le paramètre formel et réel 2
-C:\Users\simon\Desktop\GitHub\AlbicoccoS_DeWinterA\Project\Project\Main.c(147,90): warning C4047: 'fonction' : les niveaux d'indirection de 'const char *' et de 'errno_t' sont différents
-C:\Users\simon\Desktop\GitHub\AlbicoccoS_DeWinterA\Project\Project\Main.c(147,51): warning C4024: 'strcpy_s' : types différents pour le paramètre formel et réel 3
-C:\Users\simon\Desktop\GitHub\AlbicoccoS_DeWinterA\Project\Project\Main.c(148,90): warning C4047: 'fonction' : les niveaux d'indirection de 'const char *' et de 'int' sont différents
-C:\Users\simon\Desktop\GitHub\AlbicoccoS_DeWinterA\Project\Project\Main.c(148,87): warning C4024: 'strcat_s' : types différents pour le paramètre formel et réel 3
-C:\Users\simon\Desktop\GitHub\AlbicoccoS_DeWinterA\Project\Project\Main.c(148,91): warning C4047: 'fonction' : les niveaux d'indirection de 'const char *' et de 'errno_t' sont différents
-C:\Users\simon\Desktop\GitHub\AlbicoccoS_DeWinterA\Project\Project\Main.c(148,51): warning C4024: 'strcpy_s' : types différents pour le paramètre formel et réel 3
-C:\Users\simon\Desktop\GitHub\AlbicoccoS_DeWinterA\Project\Project\Main.c(163,46): warning C4244: '=' : conversion de 'double' en 'float', perte possible de données
+C:\Users\simon\Desktop\GitHub\AlbicoccoS_DeWinterA\Project\Project\Main.c(167,46): warning C4244: '=' : conversion de 'double' en 'float', perte possible de données
+C:\Users\simon\Desktop\GitHub\AlbicoccoS_DeWinterA\Project\Project\Main.c(126,7): warning C4101: 'number' : variable locale non référencée
   Project.vcxproj -> C:\Users\simon\Desktop\GitHub\AlbicoccoS_DeWinterA\Project\x64\Debug\Project.exe
