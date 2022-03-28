@@ -17,7 +17,7 @@ void wellClassified(int realClasses[], int estimatedClasses[], Classe classes[],
 			classes[realClasses[iTest] - 1].nbWellClassified++; 
 		}
 		classes[realClasses[iTest] - 1].nbTested++;
-		classes[realClasses[iTest] - 1].remplacements[estimatedClasses[iTest] - 1];
+		classes[realClasses[iTest] - 1].remplacements[estimatedClasses[iTest] - 1]++;
 	}
 }
 
@@ -54,7 +54,7 @@ void displayResultsByClass(int realClasses[], int estimatedClasses[], int nbTest
 void displayAccuracy(int realClasses[], int estimatedClasses[], int nbTests) {
 	Classe classes[NB_CLASSE_MAX]; // taille provisoire 
 	wellClassified(realClasses, estimatedClasses, classes, nbTests);
-	printf("The accuracy is %.2f%%, it means that %.2f%% of classes are well classified.", averagePercents(classes), averagePercents(classes));
+	printf("The accuracy is %.2f%%, it means that %.2f%% of classes are well classified.\n", averagePercents(classes), averagePercents(classes));
 }
 
 void displayConfusionMatrix(int realClasses[], int estimatedClasses[], int nbTests) {
@@ -64,12 +64,10 @@ void displayConfusionMatrix(int realClasses[], int estimatedClasses[], int nbTes
 	for (int iTest = 0; iTest < NB_CLASSE_MAX; iTest++) {
 		if (iTest == 0) {
 			printf("/");
-		}
-		else {
-			if (iTest == NB_CLASSE_MAX) {
+		} else {
+			if (iTest == NB_CLASSE_MAX-1) {
 				printf("\\");
-			}
-			else {
+			} else {
 				printf("|");
 			}
 		}
@@ -78,14 +76,12 @@ void displayConfusionMatrix(int realClasses[], int estimatedClasses[], int nbTes
 		}
 
 		if (iTest == 0) {
-			printf("\\");
-		}
-		else {
-			if (iTest == NB_CLASSE_MAX) {
-				printf("/");
-			}
-			else {
-				printf("|");
+			printf("\\\n");
+		} else {
+			if (iTest == NB_CLASSE_MAX-1) {
+				printf("/\n");
+			} else {
+				printf("|\n");
 			}
 		}
 	}
