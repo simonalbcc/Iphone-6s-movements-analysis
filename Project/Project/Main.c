@@ -7,7 +7,9 @@ void main(void) {
 	int estimateClasses[8] = { 5, 5, 1, 2, 1, 3, 2, 4 };
 	displayResultsByClass(realClasses, estimateClasses, 8); 
 	displayAccuracy(realClasses, estimateClasses, 8);
-
+	
+	
+	
 }
 
 
