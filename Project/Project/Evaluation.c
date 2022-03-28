@@ -21,8 +21,17 @@ void wellClassified(int realClasses[], int estimatedClasses[], Classe classes[],
 	}
 }
 
-void averagePercents() {
+double averagePercents(Classe classes[]) {
+	int nbWellClassifiedTotal = 0; 
+	int nbTestedTotal = 0;
+	int iClasse = 0; 
+	while (iClasse != NB_CLASSE_MAX && classes[iClasse].nbTested != 0) {
+		nbWellClassifiedTotal += classes[iClasse].nbWellClassified; 
+		nbTestedTotal += classes[iClasse].nbTested;
+		iClasse++; 
+	}
 
+	return (double)nbWellClassifiedTotal / nbTestedTotal * 100; 
 }
 void displayResultsByClass(int realClasses[], int estimatedClasses[], int nbTests) {
 	Classe classes[NB_CLASSE_MAX]; // taille provisoire 
@@ -42,8 +51,10 @@ void displayResultsByClass(int realClasses[], int estimatedClasses[], int nbTest
 	}
 
 }
-void displayAccuracy() {
-
+void displayAccuracy(int realClasses[], int estimatedClasses[], int nbTests) {
+	Classe classes[NB_CLASSE_MAX]; // taille provisoire 
+	wellClassified(realClasses, estimatedClasses, classes, nbTests);
+	printf("The accuracy is %.2f%%, it means that %.2f%% of classes are well classified.", averagePercents(classes), averagePercents(classes));
 }
 void displayConfusionMatrix() {
 
