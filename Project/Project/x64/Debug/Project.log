@@ -1,4 +1,2 @@
-﻿  Main.c
-C:\Users\simon\Desktop\GitHub\AlbicoccoS_DeWinterA\Project\Project\Main.c(167,46): warning C4244: '=' : conversion de 'double' en 'float', perte possible de données
-C:\Users\simon\Desktop\GitHub\AlbicoccoS_DeWinterA\Project\Project\Main.c(126,7): warning C4101: 'number' : variable locale non référencée
+﻿  Evaluation.c
   Project.vcxproj -> C:\Users\simon\Desktop\GitHub\AlbicoccoS_DeWinterA\Project\x64\Debug\Project.exe
