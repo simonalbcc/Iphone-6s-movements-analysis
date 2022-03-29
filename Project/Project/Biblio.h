@@ -44,7 +44,7 @@ typedef struct classe Classe;
 struct classe {
 	int nbWellClassified;
 	int nbTested;
-	int accuracy;
+	double accuracy;
 	int remplacements[NB_CLASSE_MAX];
 };
 

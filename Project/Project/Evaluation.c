@@ -19,6 +19,10 @@ void wellClassified(int realClasses[], int estimatedClasses[], Classe classes[],
 		classes[realClasses[iTest] - 1].nbTested++;
 		classes[realClasses[iTest] - 1].remplacements[estimatedClasses[iTest] - 1];
 	}
+
+	for (int iClasse = 0; iClasse < NB_CLASSE_MAX; iClasse++) {
+		classes[iClasse].accuracy = classes[iClasse].nbWellClassified / (double)classes[iClasse].nbTested * 100;
+	}
 }
 
 double averagePercents(Classe classes[]) {
@@ -45,7 +49,7 @@ void displayResultsByClass(int realClasses[], int estimatedClasses[], int nbTest
 			printf("\t%d\t|\t", iClasse + 1);
 			printf("%d\t|\t", classes[iClasse].nbWellClassified);
 			printf("  %d\t|  ", classes[iClasse].nbTested);
-			printf("\t%.2f\t|\t", (classes[iClasse].nbWellClassified / (double)classes[iClasse].nbTested) * 100);
+			printf("\t%.2f\t|\t", classes[iClasse].accuracy);
 			printf("\n");
 		}
 	}
