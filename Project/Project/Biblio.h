@@ -49,3 +49,21 @@ struct classe {
 };
 
 #pragma endregion 
+
+
+#pragma prototypes 
+
+void gendersArray(int subjectsGender[]); 
+void writeLineInFile(Movement movementToWrite, FILE* fi); 
+void writeLine(Movement movementToWrite, int iTest, int iSub, FILE* fiTrain, FILE* fiTest); 
+void freeString(char string[], int length); 
+void generationFile(); 
+void wellClassified(int realClasses[], int estimatedClasses[], Classe classes[], int nbTests); 
+double averagePercents(Classe classes[]); 
+void displayResultsByClass(int realClasses[], int estimatedClasses[], int nbTests); 
+void displayAccuracy(int realClasses[], int estimatedClasses[], int nbTests); 
+void displayConfusionMatrix(int realClasses[], int estimatedClasses[], int nbTests); 
+
+
+
+#pragma endregion
