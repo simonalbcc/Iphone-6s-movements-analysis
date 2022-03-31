@@ -40,12 +40,12 @@ struct movementRead {
 	float userAccZ;
 };
 
-typedef struct classe Classe;
-struct classe {
+typedef struct class Class;
+struct class {
 	int nbWellClassified;
 	int nbTested;
 	double accuracy;
-	int remplacements[NB_CLASSE_MAX];
+	int remplacements[NB_CLASSES_MAX];
 };
 
 #pragma endregion 
@@ -58,8 +58,8 @@ void writeLineInFile(Movement movementToWrite, FILE* fi);
 void writeLine(Movement movementToWrite, int iTest, int iSub, FILE* fiTrain, FILE* fiTest); 
 void freeString(char string[], int length); 
 void generationFile(); 
-void wellClassified(int realClasses[], int estimatedClasses[], Classe classes[], int nbTests); 
-double averagePercents(Classe classes[]); 
+void wellClassified(int realClasses[], int estimatedClasses[], Class classes[], int nbTests);
+double averagePercents(Class classes[]);
 void displayResultsByClass(int realClasses[], int estimatedClasses[], int nbTests); 
 void displayAccuracy(int realClasses[], int estimatedClasses[], int nbTests); 
 void displayConfusionMatrix(int realClasses[], int estimatedClasses[], int nbTests); 

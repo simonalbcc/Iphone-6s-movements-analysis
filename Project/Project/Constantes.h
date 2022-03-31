@@ -6,5 +6,5 @@
 #define SIZE_LINE 1000
 #define TESTSET "testset.csv"
 #define TRAINSET "trainset.csv"
-#define NB_CLASSE_MAX 20
+#define NB_CLASSES_MAX 20
 #pragma endregion
