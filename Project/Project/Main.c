@@ -9,7 +9,6 @@ void main(void) {
 	displayAccuracy(realClasses, estimateClasses, 8);
 	displayConfusionMatrix(realClasses, estimateClasses, 8);
 	
-	
 }
 
 
