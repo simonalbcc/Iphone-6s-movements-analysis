@@ -141,6 +141,8 @@
   <ItemGroup>
     <ClCompile Include="Evaluation.c" />
     <ClCompile Include="Main.c" />
+    <ClCompile Include="ModelCreation.c" />
+    <ClCompile Include="Utility.c" />
   </ItemGroup>
   <ItemGroup>
     <None Include="FileManagement.c" />

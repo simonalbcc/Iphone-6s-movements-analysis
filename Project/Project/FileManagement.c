@@ -71,7 +71,7 @@ void generationFile() {
 								   "std_14", "ups_3", "ups_4", "ups_12", "wlk_7", "wlk_8", "wlk_15" };
 	char pathFiSub[40];
 
-	int people[24];
+	int people[NB_SUBJECTS];
 	gendersArray(people);
 
 	FILE* fi;
