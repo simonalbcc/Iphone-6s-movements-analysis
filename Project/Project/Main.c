@@ -8,7 +8,10 @@ void main(void) {
 	displayResultsByClass(realClasses, estimateClasses, 8); 
 	displayAccuracy(realClasses, estimateClasses, 8);
 	displayConfusionMatrix(realClasses, estimateClasses, 8);
+<<<<<<< HEAD
 	
+=======
+>>>>>>> parent of 2b71b0d (Phase 3)
 	
 }
 
