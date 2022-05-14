@@ -36,8 +36,8 @@ void writeLineInFile(Movement movementToWrite, FILE* fi) {
 	fprintf(fi, "\n%d,%d,%d,", movementToWrite.name, movementToWrite.gender, movementToWrite.index + 1);
 	int iVAcc = 0;
 	while (iVAcc < TIME_EVALUATED) {												// inverser les conditions -> corrigé (voir com suivant) 
-		fprintf(fi, "%lf", movementToWrite.vAcc[iVAcc]);					// c'est un peu bizarre : vous avez rajouté des 0 pour arriver jusqu'à 600
-		iVAcc++;														// et là vous ne les mettez pas dans le fichier -> corrigé 
+		fprintf(fi, "| %lf", movementToWrite.vAcc[iVAcc]);							// c'est un peu bizarre : vous avez rajouté des 0 pour arriver jusqu'à 600
+		iVAcc++;																	// et là vous ne les mettez pas dans le fichier -> corrigé 
 	}
 }
 void writeLine(Movement movementToWrite, int iTest, int iSub, FILE* fiTrain, FILE* fiTest) {
@@ -46,11 +46,6 @@ void writeLine(Movement movementToWrite, int iTest, int iSub, FILE* fiTrain, FIL
 	}
 	else {
 		writeLineInFile(movementToWrite, fiTrain);
-	}
-}
-void freeString(char string[], int length) {
-	for (int iChar = 0; iChar < length; iChar++) {
-		string[iChar] = '\0';
 	}
 }
 void generationFile() {
@@ -72,7 +67,6 @@ void generationFile() {
 
 		FILE* fiCurrent;
 		char line[SIZE_LINE];
-		char number[MAX_NUMBER];
 
 		MovementRead movementRead;
 		Movement movementToWrite;

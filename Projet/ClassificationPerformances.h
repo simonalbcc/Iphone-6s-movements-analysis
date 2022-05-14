@@ -52,7 +52,7 @@ typedef struct movementType MovementType;
 struct movementType {
 	double averagePerTenthSecond[TIME_EVALUATED];
 	double standardDeviation[TIME_EVALUATED];
-	double nbVaccNotNull[TIME_EVALUATED];
+	int nbVaccNotNull[TIME_EVALUATED];
 	double generalAverage;
 	int nbTotalNotNull;
 };
@@ -71,7 +71,7 @@ void displayResultsByClass(int realClasses[], int estimatedClasses[], int nbTest
 void displayAccuracy(int realClasses[], int estimatedClasses[], int nbTests); 
 void displayConfusionMatrix(int realClasses[], int estimatedClasses[], int nbTests); 
  // phase 3 
-/* void initMovementTypeArray(MovementType movementType[]);
+void initMovementTypeArray(MovementType movementType[]);
 void modelCreation();
-int decomposition(char line[], float data[]);
-void writeAllMovementTypeInFile(MovementType movementType[]);*/ 
+void decomposition(char line[], double data[]);
+void writeAllMovementTypeInFile(MovementType movementType[]);

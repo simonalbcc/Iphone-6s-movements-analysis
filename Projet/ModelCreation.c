@@ -12,18 +12,17 @@ void initMovementTypeArray (MovementType movementType[]) {
 		}
 	}
 }
-/*
 void modelCreation() {
 	MovementType movementType[NB_TYPE];
 	Movement currentMov;
 	FILE* fiTrain; 
-	int iMov = 0;
+	int iMov = 1; 
 	int iTenthSecond; 
 	char line[SIZE_LINE];
 
 	initMovementTypeArray(movementType);
 	
-	fopen_s(&fiTrain, TRAINSET, "a+");
+	fopen_s(&fiTrain, TRAINSET, "r");
 
 	while (!feof(fiTrain) && iMov < 6) {
 		fgets(line, SIZE_LINE, fiTrain);
@@ -58,6 +57,4 @@ void modelCreation() {
 
 
 }
-
-*/
 

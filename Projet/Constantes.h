@@ -11,4 +11,5 @@
 #define PATH_SIZE 40
 #define NB_TYPE 6
 #define MODEL "fiModel.csv"
+#define SIZE_CHAR_BETWEEN 2
 
