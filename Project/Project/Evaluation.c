@@ -1,17 +1,6 @@
-#include "classificationPerformances.h"
+#include "Biblio.h"
 
 // phase 2 
-
-int highestClass(int realClasses[], int nbTests) {
-	int highest = 0; 
-	for (int iRealClass = 0; iRealClass < nbTests; iRealClass++) {
-		if (highest < realClasses[iRealClass]) {
-			highest = realClasses[iRealClass]; 
-		}
-	}
-	return highest; 
-}
-
 void wellClassified(int realClasses[], int estimatedClasses[], Class classes[], int nbTests) {
 	int iClass = 0; 
 	while (iClass < NB_CLASSES_MAX) {
@@ -31,8 +20,11 @@ void wellClassified(int realClasses[], int estimatedClasses[], Class classes[], 
 		classes[realClasses[iTest] - 1].remplacements[estimatedClasses[iTest] - 1]++;
 	}
 
+	for (int iClass = 0; iClass < NB_CLASSES_MAX; iClass++) {
+		classes[iClass].accuracy = classes[iClass].nbWellClassified / (double)classes[iClass].nbTested * 100;
+	}
 }
-double globalAccuracy(Class classes[]) {
+double averagePercents(Class classes[]) {
 	int nbWellClassifiedTotal = 0; 
 	int nbTestedTotal = 0;
 	int iClass = 0; 
@@ -44,21 +36,14 @@ double globalAccuracy(Class classes[]) {
 
 	return (double)nbWellClassifiedTotal / nbTestedTotal * 100; 
 }
-void accuracy(Class classes[]) {
-	for (int iClass = 0; iClass < NB_CLASSES_MAX; iClass++) {
-		classes[iClass].accuracy = classes[iClass].nbWellClassified / (double)classes[iClass].nbTested * 100;
-	}
-}
 void displayResultsByClass(int realClasses[], int estimatedClasses[], int nbTests) {
 	Class classes[NB_CLASSES_MAX]; // taille provisoire 
 
 	wellClassified(realClasses, estimatedClasses, classes, nbTests);
-	accuracy(classes); 
-	int nbClassMax = highestClass(realClasses, nbTests);
 
 	printf("Numero Class\t Bien classes\t      Total\t   Pourcentage\n");
 	printf("_________________________________________________________________\n");
-	for (int iClass = 0; iClass < nbClassMax; iClass++) {
+	for (int iClass = 0; iClass < NB_CLASSES_MAX; iClass++) {
 		if (classes[iClass].nbTested != 0) {
 			printf("\t%d\t|\t", iClass + 1);
 			printf("%d\t|\t", classes[iClass].nbWellClassified);
@@ -72,31 +57,30 @@ void displayResultsByClass(int realClasses[], int estimatedClasses[], int nbTest
 void displayAccuracy(int realClasses[], int estimatedClasses[], int nbTests) {
 	Class classes[NB_CLASSES_MAX];
 	wellClassified(realClasses, estimatedClasses, classes, nbTests);
-	printf("The accuracy is %.2f%%, it means that %.2f%% of classes are well classified.\n", globalAccuracy(classes), globalAccuracy(classes));
+	printf("The accuracy is %.2f%%, it means that %.2f%% of classes are well classified.\n", averagePercents(classes), averagePercents(classes));
 }
 void displayConfusionMatrix(int realClasses[], int estimatedClasses[], int nbTests) {
-	int nbClassMax = highestClass(realClasses, nbTests);
 	Class classes[NB_CLASSES_MAX];
 	wellClassified(realClasses, estimatedClasses, classes, nbTests);
 
-	for (int iTest = 0; iTest < nbClassMax; iTest++) {
+	for (int iTest = 0; iTest < NB_CLASSES_MAX; iTest++) {
 		if (iTest == 0) {
 			printf("/");
 		} else {
-			if (iTest == nbClassMax -1) {
+			if (iTest == NB_CLASSES_MAX-1) {
 				printf("\\");
 			} else {
 				printf("|");
 			}
 		}
-		for (int iClassement = 0; iClassement < nbClassMax; iClassement++) {
+		for (int iClassement = 0; iClassement < NB_CLASSES_MAX; iClassement++) {
 			printf(" %d ", classes[iTest].remplacements[iClassement]);
 		}
 
 		if (iTest == 0) {
 			printf("\\\n");
 		} else {
-			if (iTest == nbClassMax -1) {
+			if (iTest == NB_CLASSES_MAX-1) {
 				printf("/\n");
 			} else {
 				printf("|\n");

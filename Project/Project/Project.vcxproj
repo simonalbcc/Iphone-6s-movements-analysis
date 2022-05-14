@@ -146,7 +146,7 @@
     <None Include="FileManagement.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="classificationPerformances.h" />
+    <ClInclude Include="Biblio.h" />
     <ClInclude Include="Constantes.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
