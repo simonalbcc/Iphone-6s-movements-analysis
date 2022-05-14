@@ -48,15 +48,6 @@ struct class {
 	int remplacements[NB_CLASSES_MAX];
 };
 
-// phase 3 
-typedef struct movementType MovementType;
-struct movementType {
-	float averagePerTenthSecond[TIME_EVALUATED];
-	float standardDeviation[TIME_EVALUATED];
-	float nbVaccNotNull[TIME_EVALUATED];
-	double generalAverage;
-	int nbTotalNotNull;
-};
 #pragma endregion 
 #pragma region prototypes 
 
@@ -71,11 +62,7 @@ void accuracy(Class classes[]);
 void displayResultsByClass(int realClasses[], int estimatedClasses[], int nbTests); 
 void displayAccuracy(int realClasses[], int estimatedClasses[], int nbTests); 
 void displayConfusionMatrix(int realClasses[], int estimatedClasses[], int nbTests); 
- // phase 3 
-void initMovementTypeArray(MovementType movementType[]);
-void modelCreation();
-int decomposition(char line[], float data[]);
-void writeAllMovementTypeInFile(MovementType movementType[]);
+
 
 
 #pragma endregion

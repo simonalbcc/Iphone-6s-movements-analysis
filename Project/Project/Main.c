@@ -1,4 +1,4 @@
-#include "classificationPerformances.h" 
+#include "Biblio.h" 
 
 void main(void) {
 
@@ -8,7 +8,6 @@ void main(void) {
 	displayResultsByClass(realClasses, estimateClasses, 8); 
 	displayAccuracy(realClasses, estimateClasses, 8);
 	displayConfusionMatrix(realClasses, estimateClasses, 8);
-	modelCreation(); 
 	
 }
 

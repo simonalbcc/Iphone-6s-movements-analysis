@@ -71,7 +71,7 @@ void generationFile() {
 								   "std_14", "ups_3", "ups_4", "ups_12", "wlk_7", "wlk_8", "wlk_15" };
 	char pathFiSub[40];						// grandeurs de tableaux en # define (partout)
 
-	int people[NB_SUBJECTS];
+	int people[24];
 	gendersArray(people);
 
 	FILE* fi;

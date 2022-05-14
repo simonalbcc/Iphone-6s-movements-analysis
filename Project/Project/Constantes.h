@@ -7,6 +7,4 @@
 #define TESTSET "testset.csv"
 #define TRAINSET "trainset.csv"
 #define NB_CLASSES_MAX 20
-#define NB_TYPE 6
-#define MODEL "fiModel.csv"
 #pragma endregion
