@@ -1,1 +1,3 @@
-﻿  Projet.vcxproj -> C:\Users\simon\Desktop\GitHub & utils\AlbicoccoS_DeWinterA\x64\Debug\Projet.exe
+﻿  FileManagement.c
+E:\GitHub\test\Projet\FileManagement.c(75,8): warning C4101: 'number' : variable locale non référencée
+  Projet.vcxproj -> E:\GitHub\test\x64\Debug\Projet.exe

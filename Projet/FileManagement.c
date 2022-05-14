@@ -4,7 +4,7 @@
 void gendersArray(int subjectsGender[]) {
 	FILE* fiGender;                                                        // donner un nom plus significatif -> corrigé 
 	Someone user;
-	bool incorrect = false;
+	bool correct = true;
 
 	char line[SIZE_LINE];
 
@@ -12,19 +12,18 @@ void gendersArray(int subjectsGender[]) {
 
 	if (fiGender == NULL) {
 		printf("Erreur a l'ouverture du fichier !");
-	}
-	else {
+	}else {
 		while (!feof(fiGender)) {							// je ne comprends pas à quoi sert cette boucle ? De plus, ça ne correspond pas à votre DA
 			int iSubject = 0;								// la boucle sert à aller chercher les infos demandées dans le doc data_subjects_info, DA à corriger 
 			//lire ligne d'entête
 			fgets(line, SIZE_LINE, fiGender);
 			//lecture du genre de chaque ligne
-			while (fgets(line, SIZE_LINE, fiGender) != NULL && incorrect) {
+			while (fgets(line, SIZE_LINE, fiGender) != NULL && correct) {
 				if (sscanf_s(line, "%d,%d,%d,%d,%d", &user.code, &user.age, &user.weight, &user.height, &user.gender) == 5) {
 					subjectsGender[iSubject] = user.gender;
 					iSubject++;
 				}else {
-					incorrect = true;
+					correct = false;
 					printf("Erreur a la lecture des genres des sujets");   // et peut-être sortir directement de la boucle si erreur -> corrigé 
 				}
 			}
@@ -61,7 +60,7 @@ void generationFile() {
 	fopen_s(&fiTest, TESTSET, "w");				// pourquoi pas mode w? -> corrigé (avant a+) 
 	fopen_s(&fiTrain, TRAINSET, "w");			// tests si problème?	-> corrigé 
 
-	if (fiTest == NULL & fiTrain == NULL) {
+	if (fiTest == NULL && fiTrain == NULL) {
 		printf("Probleme lors de l'ouverture d'un des 2 fichiers");
 	} else {
 		char paths[NB_DIR][CHAR_MAX_SIZE] = { "dws_1", "dws_2", "dws_11", "jog_9", "jog_16", "sit_5", "sit_13", "std_6",
