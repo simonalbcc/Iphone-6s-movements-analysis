@@ -36,7 +36,7 @@ void writeLineInFile(Movement movementToWrite, FILE* fi) {
 	fprintf(fi, "\n%d,%d,%d,", movementToWrite.name, movementToWrite.gender, movementToWrite.index + 1);
 	int iVAcc = 0;
 	while (iVAcc < TIME_EVALUATED) {												// inverser les conditions -> corrigé (voir com suivant) 
-		fprintf(fi, "| %lf", movementToWrite.vAcc[iVAcc]);							// c'est un peu bizarre : vous avez rajouté des 0 pour arriver jusqu'à 600
+		fprintf(fi, ",%lf", movementToWrite.vAcc[iVAcc]);							// c'est un peu bizarre : vous avez rajouté des 0 pour arriver jusqu'à 600
 		iVAcc++;																	// et là vous ne les mettez pas dans le fichier -> corrigé 
 	}
 }
