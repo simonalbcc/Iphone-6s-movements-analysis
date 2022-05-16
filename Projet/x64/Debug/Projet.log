@@ -1,2 +1,5 @@
-﻿  Main.c
+﻿  ModelCreation.c
+C:\Users\simon\Desktop\GitHub & utils\AlbicoccoS_DeWinterA\Projet\ModelCreation.c(27,7): warning C4013: 'exit' non défini(e) ; extern retournant int pris par défaut
+C:\Users\simon\Desktop\GitHub & utils\AlbicoccoS_DeWinterA\Projet\ModelCreation.c(49,19): warning C4013: 'atoi' non défini(e) ; extern retournant int pris par défaut
+C:\Users\simon\Desktop\GitHub & utils\AlbicoccoS_DeWinterA\Projet\ModelCreation.c(20,8): warning C4101: 'fiMode' : variable locale non référencée
   Projet.vcxproj -> C:\Users\simon\Desktop\GitHub & utils\AlbicoccoS_DeWinterA\x64\Debug\Projet.exe

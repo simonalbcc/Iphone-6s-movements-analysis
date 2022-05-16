@@ -73,5 +73,6 @@ void displayConfusionMatrix(int realClasses[], int estimatedClasses[], int nbTes
  // phase 3 
 void initMovementTypeArray(MovementType movementType[]);
 void modelCreation();
-void decomposition(char line[], double data[]);
+void modelCreation2();
+int decomposition(char line[], double data[]);
 void writeAllMovementTypeInFile(MovementType movementType[]);

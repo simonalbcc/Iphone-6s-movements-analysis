@@ -33,7 +33,7 @@ void gendersArray(int subjectsGender[]) {
 
 }
 void writeLineInFile(Movement movementToWrite, FILE* fi) {
-	fprintf(fi, "\n%d,%d,%d,", movementToWrite.name, movementToWrite.gender, movementToWrite.index + 1);
+	fprintf(fi, "\n%d,%d,%d", movementToWrite.name, movementToWrite.gender, movementToWrite.index + 1);
 	int iVAcc = 0;
 	while (iVAcc < TIME_EVALUATED) {												// inverser les conditions -> corrigé (voir com suivant) 
 		fprintf(fi, ",%lf", movementToWrite.vAcc[iVAcc]);							// c'est un peu bizarre : vous avez rajouté des 0 pour arriver jusqu'à 600
@@ -55,7 +55,7 @@ void generationFile() {
 	fopen_s(&fiTest, TESTSET, "w");				// pourquoi pas mode w? -> corrigé (avant a+) 
 	fopen_s(&fiTrain, TRAINSET, "w");			// tests si problème?	-> corrigé 
 
-	if (fiTest == NULL && fiTrain == NULL) {
+	if (fiTest == NULL || fiTrain == NULL) {
 		printf("Probleme lors de l'ouverture d'un des 2 fichiers");
 	} else {
 		char paths[NB_DIR][CHAR_MAX_SIZE] = { "dws_1", "dws_2", "dws_11", "jog_9", "jog_16", "sit_5", "sit_13", "std_6",

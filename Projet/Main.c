@@ -3,6 +3,6 @@
 void main(void) {
 	//generationFile(); 
 
-	modelCreation(); 
+	modelCreation2(); 
 
 }
