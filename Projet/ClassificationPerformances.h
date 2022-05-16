@@ -25,6 +25,7 @@ struct movement {
 
 typedef struct movementRead MovementRead;
 struct movementRead {
+	int index; 
 	double attitudeRoll;
 	double attitudePitch;
 	double attitudeYaw;

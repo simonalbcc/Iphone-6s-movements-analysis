@@ -1,3 +1,2 @@
-﻿  Utility.c
-E:\GitHub\test\Projet\Utility.c(12,11): warning C4013: 'atoi' non défini(e) ; extern retournant int pris par défaut
-  Projet.vcxproj -> E:\GitHub\test\x64\Debug\Projet.exe
+﻿  FileManagement.c
+  Projet.vcxproj -> C:\Users\simon\Desktop\GitHub & utils\AlbicoccoS_DeWinterA\x64\Debug\Projet.exe

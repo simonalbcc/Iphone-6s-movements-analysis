@@ -36,7 +36,7 @@ void writeLineInFile(Movement movementToWrite, FILE* fi) {
 	fprintf(fi, "\n%d,%d,%d", movementToWrite.name, movementToWrite.gender, movementToWrite.index + 1);
 	int iVAcc = 0;
 	while (iVAcc < TIME_EVALUATED) {												// inverser les conditions -> corrigé (voir com suivant) 
-		fprintf(fi, ",%lf", movementToWrite.vAcc[iVAcc]);							// c'est un peu bizarre : vous avez rajouté des 0 pour arriver jusqu'à 600
+		fprintf(fi, ",%f", movementToWrite.vAcc[iVAcc]);							// c'est un peu bizarre : vous avez rajouté des 0 pour arriver jusqu'à 600
 		iVAcc++;																	// et là vous ne les mettez pas dans le fichier -> corrigé 
 	}
 }
@@ -104,9 +104,9 @@ void generationFile() {
 					while (!feof(fiCurrent)) {
 						//lecture du genre de chaque ligne
 						fgets(line, SIZE_LINE, fiCurrent);			// les scanf pour des double c'est lf -> corrigé 
-						sscanf_s(line, "%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf", &movementRead.attitudeRoll, &movementRead.attitudePitch, &movementRead.attitudeYaw, &movementRead.gravityX, &movementRead.gravityY, &movementRead.gravityZ, &movementRead.rotationRX, &movementRead.rotationRY, &movementRead.rotationRZ, &movementRead.userAccX, &movementRead.userAccY, &movementRead.userAccZ);
-						while (!feof(fiCurrent) && iMovement < TIME_EVALUATED) {		// drôle de condition pour tester une fin de fichier !! -> corrigé 
-							if (sscanf_s(line, "%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf", &movementRead.attitudeRoll, &movementRead.attitudePitch, &movementRead.attitudeYaw, &movementRead.gravityX, &movementRead.gravityY, &movementRead.gravityZ, &movementRead.rotationRX, &movementRead.rotationRY, &movementRead.rotationRZ, &movementRead.userAccX, &movementRead.userAccY, &movementRead.userAccZ) == 12) {
+						sscanf_s(line, "%d,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf", &movementRead.index, &movementRead.attitudeRoll, &movementRead.attitudePitch, &movementRead.attitudeYaw, &movementRead.gravityX, &movementRead.gravityY, &movementRead.gravityZ, &movementRead.rotationRX, &movementRead.rotationRY, &movementRead.rotationRZ, &movementRead.userAccX, &movementRead.userAccY, &movementRead.userAccZ);
+						while (!feof(fiCurrent) && iMovement < TIME_EVALUATED) {	// drôle de condition pour tester une fin de fichier !! -> corrigé 
+							if (sscanf_s(line, "%d,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf,%lf", &movementRead.index, &movementRead.attitudeRoll, &movementRead.attitudePitch, &movementRead.attitudeYaw, &movementRead.gravityX, &movementRead.gravityY, &movementRead.gravityZ, &movementRead.rotationRX, &movementRead.rotationRY, &movementRead.rotationRZ, &movementRead.userAccX, &movementRead.userAccY, &movementRead.userAccZ) == 13) {
 								movementToWrite.vAcc[iMovement] = sqrt((pow(movementRead.userAccX, 2) + pow(movementRead.userAccY, 2) + pow(movementRead.userAccZ, 2)));
 								iMovement++;
 							} else {			// mettre un else au cas où -> corrigé 
