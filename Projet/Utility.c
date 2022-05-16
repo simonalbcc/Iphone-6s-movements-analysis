@@ -19,7 +19,6 @@ int decomposition(char line[], double data[]) {
         i++;
         token = strtok_s(NULL, s, &nextToken);
     }
-    printf("je suis %d\n",i); 
     return mvt; 
 
 }
@@ -37,20 +36,21 @@ void writeAllMovementTypeInFile(MovementType movementType[]) {
         while (iMov < 6) {
             printf("J'ai bien fait ca %dx\n", iMov+1);
             fprintf(fiModel, "\n");
-            fprintf(fiModel, "%d, ", iMov + 1);
+            fprintf(fiModel, "%d", iMov + 1);
             iTenthSecond = 0;
             while (iTenthSecond < TIME_EVALUATED) {
                 fprintf(fiModel, ", %f", movementType[iMov].averagePerTenthSecond[iTenthSecond]);
                 iTenthSecond++;
             }
             fprintf(fiModel, "\n");
-            fprintf(fiModel, "%d,", iMov + 1);
-            while (iTenthSecond > 0) {
+            fprintf(fiModel, "%d", iMov + 1);
+            iTenthSecond = 0;
+            while (iTenthSecond < TIME_EVALUATED) {
                 fprintf(fiModel, ",%f", movementType[iMov].standardDeviation[iTenthSecond]);
-                iTenthSecond--;
+                iTenthSecond++;
             }
             fprintf(fiModel, "\n");
-            fprintf(fiModel, "%d,", iMov + 1);
+            fprintf(fiModel, "%d", iMov + 1);
             fprintf(fiModel, ", %f", movementType[iMov].generalAverage);
 
             iMov++;
