@@ -79,15 +79,9 @@ void generationFile() {
 		// première boucle sur l'ensemble des dossiers 
 		while (iDir < 15) {
 			int iSub = 0;
-			printf("Je suis dans le numero %d\n", iDir + 1);
-			// vérifier si on est toujours dans le même mouvement 
-			if (iDir < 13 && (paths[iDir][1] != paths[iDir + 1][1])) {		
-				iMvt++;
-			}
 			movementToWrite.name = iMvt+1;
 			// première boucle sur l'ensemble des fichiers d'un dossier  
 			while (iSub < NB_SUBJECTS) {
-				printf("\t- Je suis dans le sub %d\n", iSub + 1);
 				movementToWrite.gender = people[iSub];
 				movementToWrite.index = iIndex;
 				// crée le chemin pour le fichier à utiliser 
@@ -133,6 +127,10 @@ void generationFile() {
 			}
 			else {
 				iTest += 2;
+			}
+			// vérifier si on sera toujours dans le même mouvement 
+			if (iDir < 13 && (paths[iDir][1] != paths[iDir + 1][1])) {
+				iMvt++;
 			}
 			iDir++;
 		}
