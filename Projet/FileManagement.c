@@ -18,7 +18,8 @@ void gendersArray(int subjectsGender[]) {
 			//lire ligne d'entête
 			fgets(line, SIZE_LINE, fiGender);
 			//lecture du genre de chaque ligne
-			while (fgets(line, SIZE_LINE, fiGender) != NULL && correct) {
+			fgets(line, SIZE_LINE, fiGender); 
+			while (!feof(fiGender) && correct) {
 				if (sscanf_s(line, "%d,%d,%d,%d,%d", &user.code, &user.age, &user.weight, &user.height, &user.gender) == 5) {
 					subjectsGender[iSubject] = user.gender;
 					iSubject++;
@@ -26,6 +27,7 @@ void gendersArray(int subjectsGender[]) {
 					correct = false;
 					printf("Erreur a la lecture des genres des sujets");   // et peut-être sortir directement de la boucle si erreur -> corrigé 
 				}
+				fgets(line, SIZE_LINE, fiGender)
 			}
 		}
 		fclose(fiGender);
@@ -77,7 +79,7 @@ void generationFile() {
 		int iDir = 0;
 
 		// première boucle sur l'ensemble des dossiers 
-		while (iDir < 15) {
+		while (iDir < NB_DIR) {
 			int iSub = 0;
 			movementToWrite.name = iMvt+1;
 			// première boucle sur l'ensemble des fichiers d'un dossier  
@@ -89,7 +91,7 @@ void generationFile() {
 
 				fopen_s(&fiCurrent, pathFiSub, "r");  					// pourquoi r+? -> corrigé 
 				if (fiCurrent == NULL) {
-					printf("Erreur a l'ouverture du fichier ! ici");
+					printf("Erreur a l'ouverture du fichier !");
 				}
 				else {
 					//lire ligne d'entête
@@ -117,7 +119,7 @@ void generationFile() {
 						//iMovement = 0;			//inutile tu le refais après -> corrigé 
 					}
 					writeLine(movementToWrite, iTest, iSub, fiTrain, fiTest);
-					freeString(pathFiSub, sizeof(pathFiSub));       // est-ce utile?? -> oui, le chemin change à chaque tour de boucle 
+					//freeString(pathFiSub, sizeof(pathFiSub));       // est-ce utile?? -> oui, le chemin change à chaque tour de boucle 
 					iSub++;
 					iIndex++;
 				}
