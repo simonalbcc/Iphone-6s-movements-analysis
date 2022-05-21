@@ -3,6 +3,7 @@
 #include <stdbool.h>
 #include <string.h>
 #include <math.h>
+#include <limits.h>
 #include "Constantes.h" 
 
 typedef struct someone Someone;
@@ -58,6 +59,14 @@ struct movementType {
 	int nbTotalNotNull;
 };
 
+typedef struct model Model;
+struct model {
+	int type;
+	double averages[TIME_EVALUATED];
+	double stds[TIME_EVALUATED];
+	double globalAvg;
+};
+
 // phase 1 
 void gendersArray(int subjectsGender[]);
 void writeLineInFile(Movement movementToWrite, FILE* fi); 
@@ -77,3 +86,4 @@ void modelCreation();
 void modelCreation2();
 int decomposition(char line[], double data[]);
 void writeAllMovementTypeInFile(MovementType movementType[]);
+int minusDistanceStdClass(double data[], Model models[]);

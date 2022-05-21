@@ -21,15 +21,15 @@ void modelCreation() {
 	int iTenthSecond; 
 	char line[SIZE_LINE];
 
-	initMovementTypeArray(movementType);
-	
 	fopen_s(&fiTrain, TRAINSET, "r");
+
 	if (fiTrain == NULL) {
 		printf("Probleme a l'ouverture de trainset"); 
 	} else {
+		initMovementTypeArray(movementType);
 		fgets(line, SIZE_LINE, fiTrain); // get headline
 		fgets(line, SIZE_LINE, fiTrain); // get first line 
-		while (!feof(fiTrain) && iMov < NB_TYPE) {
+		while (!feof(fiTrain)) {
 			currentMov.name = decomposition(line, currentMov.vAcc);
 
 			while (!feof(fiTrain) && iMov == currentMov.name - 1) {
@@ -46,7 +46,7 @@ void modelCreation() {
 				}
 			}
 			iTenthSecond = 0;
-			while (iTenthSecond < TIME_EVALUATED && movementType[iMov].averagePerTenthSecond[iTenthSecond] != 0) {
+			while (iTenthSecond < TIME_EVALUATED) {
 				movementType[iMov].generalAverage += movementType[iMov].averagePerTenthSecond[iTenthSecond];
 				movementType[iMov].averagePerTenthSecond[iTenthSecond] /= movementType[iMov].nbVaccNotNull[iTenthSecond];
 				movementType[iMov].nbTotalNotNull += movementType[iMov].nbVaccNotNull[iTenthSecond];

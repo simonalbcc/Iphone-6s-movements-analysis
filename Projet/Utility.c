@@ -44,6 +44,7 @@ void writeAllMovementTypeInFile(MovementType movementType[]) {
             }
             fprintf(fiModel, "\n");
             fprintf(fiModel, "%d", iMov + 1);
+            printf("%d", iTenthSecond);
             iTenthSecond = 0;
             while (iTenthSecond < TIME_EVALUATED) {
                 fprintf(fiModel, ",%f", movementType[iMov].standardDeviation[iTenthSecond]);
@@ -58,8 +59,38 @@ void writeAllMovementTypeInFile(MovementType movementType[]) {
     }
 }
 
-void freeString(char string[], int length) {
-    for (int iChar = 0; iChar < length; iChar++) {
-        string[iChar] = '\0';
+int minusDistanceStdClass(double data[], Model models[]) {
+    double std[NB_TYPE][TIME_EVALUATED];
+    int lookLike[NB_TYPE] = {0,0,0,0,0,0};
+
+    for (int iModel = 0; iModel < NB_TYPE; iModel++) {
+        for (int iTenthSecond = 0; iTenthSecond < TIME_EVALUATED; iTenthSecond++) {
+            std[iModel][iTenthSecond] = sqrt(pow((data[iTenthSecond] - models[iModel].averages[iTenthSecond]), 2));
+        }
     }
+
+    for (int iTenthSecond = 0; iTenthSecond < TIME_EVALUATED; iTenthSecond++) {
+        int min = INT_MAX;
+        int minIModel;
+        for (int iModel = 0; iModel < NB_TYPE; iModel++) {
+            double gapWithModel = gapBetweenTwoNumbers(std[iModel][iTenthSecond], models[iModel].stds[iTenthSecond]);
+            if (min > gapWithModel) {
+                min = gapWithModel;
+                minIModel = iModel;
+            }
+            lookLike[minIModel]++;
+        }
+    }
+
+    int min = 0;
+    for (int iModel = 1; iModel < NB_TYPE; iModel++) {
+        if (lookLike[min] > lookLike[iModel]) {
+            min = iModel;
+        }
+    }
+    return min + 1;
+}
+
+double gapBetweenTwoNumbers(double number1, double number2) {
+    return sqrt(pow((number1 - number2), 2));
 }

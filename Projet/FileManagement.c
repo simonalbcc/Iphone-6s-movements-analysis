@@ -27,7 +27,7 @@ void gendersArray(int subjectsGender[]) {
 					correct = false;
 					printf("Erreur a la lecture des genres des sujets");   // et peut-être sortir directement de la boucle si erreur -> corrigé 
 				}
-				fgets(line, SIZE_LINE, fiGender)
+				fgets(line, SIZE_LINE, fiGender);
 			}
 		}
 		fclose(fiGender);
@@ -119,7 +119,7 @@ void generationFile() {
 						//iMovement = 0;			//inutile tu le refais après -> corrigé 
 					}
 					writeLine(movementToWrite, iTest, iSub, fiTrain, fiTest);
-					//freeString(pathFiSub, sizeof(pathFiSub));       // est-ce utile?? -> oui, le chemin change à chaque tour de boucle 
+					// est-ce utile?? -> oui, le chemin change à chaque tour de boucle -> non
 					iSub++;
 					iIndex++;
 				}
