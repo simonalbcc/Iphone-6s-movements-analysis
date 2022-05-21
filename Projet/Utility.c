@@ -23,6 +23,23 @@ int decomposition(char line[], double data[]) {
 
 }
 
+void decompositionModel(char line[], double data[]) {
+    int i = 0;
+    char* token = NULL;
+    char* nextToken = NULL;
+    char s[SIZE_CHAR_BETWEEN] = ",";
+
+    token = strtok_s(line, s, &nextToken);  // avoid type mvt 
+
+    token = strtok_s(NULL, s, &nextToken); // take first number
+    while (token != NULL) {
+        data[i] = atof(token);
+        i++;
+        token = strtok_s(NULL, s, &nextToken);
+    }
+
+}
+
 void writeAllMovementTypeInFile(MovementType movementType[]) {
     FILE* fiModel; 
     int iMov = 0;
@@ -59,37 +76,6 @@ void writeAllMovementTypeInFile(MovementType movementType[]) {
     }
 }
 
-int minusDistanceStdClass(double data[], Model models[]) {
-    double std[NB_TYPE][TIME_EVALUATED];
-    int lookLike[NB_TYPE] = {0,0,0,0,0,0};
-
-    for (int iModel = 0; iModel < NB_TYPE; iModel++) {
-        for (int iTenthSecond = 0; iTenthSecond < TIME_EVALUATED; iTenthSecond++) {
-            std[iModel][iTenthSecond] = sqrt(pow((data[iTenthSecond] - models[iModel].averages[iTenthSecond]), 2));
-        }
-    }
-
-    for (int iTenthSecond = 0; iTenthSecond < TIME_EVALUATED; iTenthSecond++) {
-        int min = INT_MAX;
-        int minIModel;
-        for (int iModel = 0; iModel < NB_TYPE; iModel++) {
-            double gapWithModel = gapBetweenTwoNumbers(std[iModel][iTenthSecond], models[iModel].stds[iTenthSecond]);
-            if (min > gapWithModel) {
-                min = gapWithModel;
-                minIModel = iModel;
-            }
-            lookLike[minIModel]++;
-        }
-    }
-
-    int min = 0;
-    for (int iModel = 1; iModel < NB_TYPE; iModel++) {
-        if (lookLike[min] > lookLike[iModel]) {
-            min = iModel;
-        }
-    }
-    return min + 1;
-}
 
 double gapBetweenTwoNumbers(double number1, double number2) {
     return sqrt(pow((number1 - number2), 2));

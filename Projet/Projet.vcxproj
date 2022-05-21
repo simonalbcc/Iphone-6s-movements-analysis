@@ -147,6 +147,7 @@
     <ClCompile Include="FileManagement.c" />
     <ClCompile Include="Main.c" />
     <ClCompile Include="ModelCreation.c" />
+    <ClCompile Include="ModelEvaluation.c" />
     <ClCompile Include="Utility.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -1,8 +1,3 @@
-﻿  Evaluation.c
-  FileManagement.c
-  Main.c
-  ModelCreation.c
-  Utility.c
+﻿  Utility.c
 E:\GitHub\test\Projet\Utility.c(12,11): warning C4013: 'atoi' non défini(e) ; extern retournant int pris par défaut
-E:\GitHub\test\Projet\Utility.c(68,97): error C2065: 'j' : identificateur non déclaré
-  Génération de code en cours...
+  Projet.vcxproj -> E:\GitHub\test\x64\Debug\Projet.exe

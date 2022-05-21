@@ -3,6 +3,11 @@
 void main(void) {
 	//generationFile(); 
 
-	modelCreation(); 
+	//modelCreation(); 
 
+	Model models[NB_TYPE];
+
+	initModelsArray(models);
+
+	printf("Hello");
 }

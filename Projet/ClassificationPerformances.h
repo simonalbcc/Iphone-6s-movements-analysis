@@ -86,4 +86,10 @@ void modelCreation();
 void modelCreation2();
 int decomposition(char line[], double data[]);
 void writeAllMovementTypeInFile(MovementType movementType[]);
+
+
+//phase 4
 int minusDistanceStdClass(double data[], Model models[]);
+void decompositionModel(char line[], double data[]);
+double gapBetweenTwoNumbers(double number1, double number2);
+void initModelsArray(Model models[]);
