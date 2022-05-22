@@ -86,6 +86,7 @@ void initModelsArray(Model models[]) {
             fgets(line, SIZE_LINE, fiModel);
             iModel++;
         }
+        fclose(fiModel);
     }
 }
 
@@ -100,13 +101,15 @@ void initMovementsTestAndRealClasses(double movementsTested[NB_TESTS][TIME_EVALU
     }
     else {
         fgets(line, SIZE_LINE, fiTest); //get headline
-        fgets(line, SIZE_LINE, fiTest);//get fiest line
+        fgets(line, SIZE_LINE, fiTest); //get fiest line
         int iMov = 0;
         while (!feof(fiTest)) {
             realClasses[iMov] = decomposition(line, movementsTested[iMov]);
-            fgets(line, SIZE_LINE, fiTest);
             iMov++;
+            fgets(line, SIZE_LINE, fiTest);
         }
+        realClasses[iMov] = decomposition(line, movementsTested[iMov]); //provisoire (car j comprend par fr)
+        fclose(fiTest);
     }
 }
 
@@ -124,16 +127,11 @@ void initEstimatedClasses(int estimatedClasses[], double movementsTested[][TIME_
         globalAverage /= TIME_EVALUATED;
         int ind3 = minusDistanceGloballAverage(globalAverage, models);
 
-        if (ind1 == ind2 || ind1 == ind3 ) {
-            estimatedClasses[iTest] = ind1 + 1;
+        if (ind2 == ind3) {
+            estimatedClasses[iTest] = ind2 + 1;
         }
         else {
-            if (ind2 == ind3) {
-                estimatedClasses[iTest] = ind2 + 1;
-            }
-            else {
-                estimatedClasses[iTest] = ind1 + 1;
-            }
+            estimatedClasses[iTest] = ind1 + 1;
         }
     }
 }
@@ -149,4 +147,6 @@ void modelEvaluation(void) {
     initEstimatedClasses(estimatedClasses, movementsTested, models);
 
     displayResultsByClass(realClasses, estimatedClasses, NB_TESTS);
+    displayAccuracy(realClasses, estimatedClasses, NB_TESTS);
+    displayConfusionMatrix(realClasses, estimatedClasses, NB_TESTS);
 }

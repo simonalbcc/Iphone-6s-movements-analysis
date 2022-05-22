@@ -50,12 +50,14 @@ void modelCreation() {
 				movementType[iMov].generalAverage += movementType[iMov].averagePerTenthSecond[iTenthSecond];
 				movementType[iMov].averagePerTenthSecond[iTenthSecond] /= movementType[iMov].nbVaccNotNull[iTenthSecond];
 				movementType[iMov].nbTotalNotNull += movementType[iMov].nbVaccNotNull[iTenthSecond];
-				movementType[iMov].standardDeviation[iTenthSecond] = (movementType[iMov].standardDeviation[iTenthSecond] / movementType[iMov].nbVaccNotNull[iTenthSecond]) - pow(movementType[iMov].averagePerTenthSecond[iTenthSecond],2);
+				movementType[iMov].standardDeviation[iTenthSecond] = sqrt((movementType[iMov].standardDeviation[iTenthSecond] / movementType[iMov].nbVaccNotNull[iTenthSecond]) - pow(movementType[iMov].averagePerTenthSecond[iTenthSecond],2));
 				iTenthSecond++;
 			}
 			movementType[iMov].generalAverage /= movementType[iMov].nbTotalNotNull;
 			iMov++;
 		}
+		fclose(fiTrain);
+		
 		writeAllMovementTypeInFile(movementType);
 	}
 

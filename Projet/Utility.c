@@ -35,7 +35,6 @@ void writeAllMovementTypeInFile(MovementType movementType[]) {
         printf("Erreur a l'ouverture du fichier modele");
     } else {
         while (iMov < 6) {
-            printf("J'ai bien fait ca %dx\n", iMov+1);
             fprintf(fiModel, "\n");
             fprintf(fiModel, "%d", iMov + 1);
             iTenthSecond = 0;
@@ -45,7 +44,6 @@ void writeAllMovementTypeInFile(MovementType movementType[]) {
             }
             fprintf(fiModel, "\n");
             fprintf(fiModel, "%d", iMov + 1);
-            printf("%d", iTenthSecond);
             iTenthSecond = 0;
             while (iTenthSecond < TIME_EVALUATED) {
                 fprintf(fiModel, ",%f", movementType[iMov].standardDeviation[iTenthSecond]);
@@ -57,6 +55,7 @@ void writeAllMovementTypeInFile(MovementType movementType[]) {
 
             iMov++;
         }
+        fclose(fiModel);
     }
 }
 

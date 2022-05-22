@@ -27,7 +27,7 @@ void wellClassified(int realClasses[], int estimatedClasses[], Class classes[], 
 			classes[realClasses[iTest] - 1].nbWellClassified++; 
 		}
 		classes[realClasses[iTest] - 1].nbTested++;
-		classes[realClasses[iTest] - 1].remplacements[estimatedClasses[iTest] - 1]++;
+		classes[realClasses[iTest] - 1].remplacements[estimatedClasses[iTest]]++;
 	}
 
 }

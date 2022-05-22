@@ -3,7 +3,7 @@
 void main(void) {
 	//generationFile(); 
 
-	//modelCreation(); 
+	modelCreation(); 
 
 	modelEvaluation();
 
