@@ -23,7 +23,6 @@ int decomposition(char line[], double data[]) {
 
 }
 
-
 void writeAllMovementTypeInFile(MovementType movementType[]) {
     FILE* fiModel; 
     int iMov = 0;
@@ -71,7 +70,7 @@ void decompositionModel(char line[], double data[]) {
 
     token = strtok_s(line, s, &nextToken);  // avoid type mvt 
 
-    token = strtok_s(NULL, s, &nextToken); // take first number
+    token = strtok_s(NULL, s, &nextToken);  // take first number
     while (token != NULL) {
         data[i] = atof(token);
         i++;
@@ -92,4 +91,18 @@ int mostSimilarMovement(int nearestIndicator[]) {
         }
     }
     return iMostSimilar;
+}
+
+GlobalAverage generalAverageMovement(double data[]) {
+    GlobalAverage globalAverage; 
+    globalAverage.sum = 0; 
+    int iTenthSecond = 0; 
+
+    while (iTenthSecond < TIME_EVALUATED && data[iTenthSecond] != 0) {
+        globalAverage.sum += data[iTenthSecond];
+        iTenthSecond++; 
+    }
+    globalAverage.realTimeEvaluated = iTenthSecond;
+
+   return globalAverage;
 }

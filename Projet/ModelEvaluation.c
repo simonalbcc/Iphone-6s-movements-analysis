@@ -1,17 +1,17 @@
 ﻿#include "ClassificationPerformances.h"
 
-int minusDistanceStdClass(double data[], Model models[]) {
+int minusDistanceStdClass(double data[], Model models[], int realTimeEvaluated) {
     double std[NB_TYPE][TIME_EVALUATED];
-    int nearestIndicator[NB_TYPE + 1];
+    int nearestIndicator[NB_TYPE];
 
     for (int iModel = 0; iModel < NB_TYPE; iModel++) {
-        nearestIndicator[NB_TYPE] = 0;
-        for (int iTenthSecond = 0; iTenthSecond < TIME_EVALUATED; iTenthSecond++) {
+        nearestIndicator[iModel] = 0;
+        for (int iTenthSecond = 0; iTenthSecond < realTimeEvaluated; iTenthSecond++) {
             std[iModel][iTenthSecond] = sqrt(pow((data[iTenthSecond] - models[iModel].averages[iTenthSecond]), 2));
         }
     }
 
-    for (int iTenthSecond = 0; iTenthSecond < TIME_EVALUATED; iTenthSecond++) {
+    for (int iTenthSecond = 0; iTenthSecond < realTimeEvaluated; iTenthSecond++) {
         double min = LONG_MAX;
         int minIModel = 0;
         for (int iModel = 0; iModel < NB_TYPE; iModel++) {
@@ -27,14 +27,14 @@ int minusDistanceStdClass(double data[], Model models[]) {
     return mostSimilarMovement(nearestIndicator);
 }
 
-int minusDistanceAverages(double data[], Model models[]) {
-    int nearestIndicator[NB_TYPE + 1];
+int minusDistanceAverages(double data[], Model models[], int realTimeEvaluated) {
+    int nearestIndicator[NB_TYPE];
 
     for (int iModel = 0; iModel < NB_TYPE; iModel++) {
-        nearestIndicator[NB_TYPE] = 0;
+        nearestIndicator[iModel] = 0;
     }
 
-    for (int iTenthSecond = 0; iTenthSecond < TIME_EVALUATED; iTenthSecond++) {
+    for (int iTenthSecond = 0; iTenthSecond < realTimeEvaluated; iTenthSecond++) {
         double min = LONG_MAX;
         int minIModel = 0;
         for (int iModel = 0; iModel < NB_TYPE; iModel++) {
@@ -71,11 +71,11 @@ void initModelsArray(Model models[]) {
     fopen_s(&fiModel, MODEL, "r");
 
     if (fiModel == NULL) {
-        printf("Erreur à l'ouverture du fichier !");
+        printf("Erreur à l'ouverture du fichier model!");
 
     }else {
         fgets(line, SIZE_LINE, fiModel); //get headline
-        fgets(line, SIZE_LINE, fiModel);//get fiest line
+        fgets(line, SIZE_LINE, fiModel); //get first line
         int iModel = 0;
         while (!feof(fiModel)) {
             decompositionModel(line, models[iModel].averages);
@@ -97,40 +97,38 @@ void initMovementsTestAndRealClasses(double movementsTested[NB_TESTS][TIME_EVALU
     fopen_s(&fiTest, TESTSET, "r");
 
     if (fiTest == NULL) {
-        printf("Erreur a l'ouverture du fichier !");
+        printf("Erreur a l'ouverture du fichier testset !");
     }
     else {
         fgets(line, SIZE_LINE, fiTest); //get headline
-        fgets(line, SIZE_LINE, fiTest); //get fiest line
+        fgets(line, SIZE_LINE, fiTest); //get first line
         int iMov = 0;
         while (!feof(fiTest)) {
             realClasses[iMov] = decomposition(line, movementsTested[iMov]);
             iMov++;
             fgets(line, SIZE_LINE, fiTest);
         }
-        realClasses[iMov] = decomposition(line, movementsTested[iMov]); //provisoire (car j comprend par fr)
+        realClasses[iMov] = decomposition(line, movementsTested[iMov]); // for the last line 
         fclose(fiTest);
     }
 }
 
 void initEstimatedClasses(int estimatedClasses[], double movementsTested[][TIME_EVALUATED], Model models[]) {
+    
 
     for (int iTest = 0; iTest < NB_TESTS; iTest++) {
 
-        int ind1 = minusDistanceStdClass(movementsTested[iTest], models);
-        int ind2 = minusDistanceAverages(movementsTested[iTest], models);
+        GlobalAverage globalAverage = generalAverageMovement(movementsTested[iTest]);
+           
+        globalAverage.sum /= globalAverage.realTimeEvaluated;
 
-        double globalAverage = 0;
-        for (int iTenthSecond = 0; iTenthSecond < TIME_EVALUATED; iTenthSecond++) {
-            globalAverage += movementsTested[iTest][iTenthSecond];
-        }
-        globalAverage /= TIME_EVALUATED;
-        int ind3 = minusDistanceGloballAverage(globalAverage, models);
+        int ind1 = minusDistanceStdClass(movementsTested[iTest], models, globalAverage.realTimeEvaluated);
+        int ind2 = minusDistanceAverages(movementsTested[iTest], models, globalAverage.realTimeEvaluated);
+        int ind3 = minusDistanceGloballAverage(globalAverage.sum, models);
 
         if (ind2 == ind3) {
             estimatedClasses[iTest] = ind2 + 1;
-        }
-        else {
+        } else {
             estimatedClasses[iTest] = ind1 + 1;
         }
     }
