@@ -23,22 +23,6 @@ int decomposition(char line[], double data[]) {
 
 }
 
-void decompositionModel(char line[], double data[]) {
-    int i = 0;
-    char* token = NULL;
-    char* nextToken = NULL;
-    char s[SIZE_CHAR_BETWEEN] = ",";
-
-    token = strtok_s(line, s, &nextToken);  // avoid type mvt 
-
-    token = strtok_s(NULL, s, &nextToken); // take first number
-    while (token != NULL) {
-        data[i] = atof(token);
-        i++;
-        token = strtok_s(NULL, s, &nextToken);
-    }
-
-}
 
 void writeAllMovementTypeInFile(MovementType movementType[]) {
     FILE* fiModel; 
@@ -77,6 +61,36 @@ void writeAllMovementTypeInFile(MovementType movementType[]) {
 }
 
 
+
+//Phase 4
+
+void decompositionModel(char line[], double data[]) {
+    int i = 0;
+    char* token = NULL;
+    char* nextToken = NULL;
+    char s[SIZE_CHAR_BETWEEN] = ",";
+
+    token = strtok_s(line, s, &nextToken);  // avoid type mvt 
+
+    token = strtok_s(NULL, s, &nextToken); // take first number
+    while (token != NULL) {
+        data[i] = atof(token);
+        i++;
+        token = strtok_s(NULL, s, &nextToken);
+    }
+
+}
+
 double gapBetweenTwoNumbers(double number1, double number2) {
     return sqrt(pow((number1 - number2), 2));
+}
+
+int mostSimilarMovement(int nearestIndicator[]) {
+    int iMostSimilar = 0;
+    for (int iType = 1; iType < NB_TYPE; iType++) {
+        if (nearestIndicator[iType] > nearestIndicator[iMostSimilar]) {
+            iMostSimilar = iType;
+        }
+    }
+    return iMostSimilar;
 }

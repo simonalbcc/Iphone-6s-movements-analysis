@@ -5,14 +5,7 @@ void main(void) {
 
 	//modelCreation(); 
 
-	MovementTested movementTested[30];
-
-	initMovementsTest(movementTested);
+	modelEvaluation();
 
 
-
-	Model models[NB_TYPE];
-	initModelsArray(models);
-
-	printf("Hello");
 }

@@ -12,4 +12,5 @@
 #define NB_TYPE 6
 #define MODEL "fiModel.csv"
 #define SIZE_CHAR_BETWEEN 2
+#define NB_TESTS 30
 

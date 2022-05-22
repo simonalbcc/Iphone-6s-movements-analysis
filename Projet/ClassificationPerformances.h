@@ -67,11 +67,6 @@ struct model {
 	double globalAvg;
 };
 
-typedef struct movementTested MovementTested;
-struct movementTested {
-	int type;
-	double vAcc[TIME_EVALUATED];
-};
 
 // phase 1 
 void gendersArray(int subjectsGender[]);
@@ -99,4 +94,6 @@ int minusDistanceStdClass(double data[], Model models[]);
 void decompositionModel(char line[], double data[]);
 double gapBetweenTwoNumbers(double number1, double number2);
 void initModelsArray(Model models[]);
-void initMovementsTest(MovementTested movementsTested[]);
+void initMovementsTestAndRealClasses(double movementsTested[NB_TESTS][TIME_EVALUATED], int realClasses[]);
+int mostSimilarMovement(int nearestIndicator[]);
+void modelEvaluation(void);
