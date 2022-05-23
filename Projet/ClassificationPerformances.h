@@ -67,10 +67,11 @@ struct model {
 	double globalAvg;
 };
 
-typedef struct globalAverage GlobalAverage; 
-struct globalAverage {
-	int realTimeEvaluated; 
-	double sum; 
+typedef struct indicators Indicators;
+struct indicators {
+	int indicator1;
+	int indicator2;
+	int indicator3;
 };
 
 // phase 1 
@@ -95,13 +96,11 @@ void writeAllMovementTypeInFile(MovementType movementType[]);
 
 
 //phase 4
-int minusDistanceStdClass(double data[], Model models[], int realTimeEvaluated);
-int minusDistanceAverages(double data[], Model models[], int realTimeEvaluated);
-int minusDistanceGloballAverage(double data, Model models[]); 
+Indicators indicatorsForAMovement(double data[], Model models[]);
 void decompositionModel(char line[], double data[]);
 double gapBetweenTwoNumbers(double number1, double number2);
 void initModelsArray(Model models[]);
 void initMovementsTestAndRealClasses(double movementsTested[NB_TESTS][TIME_EVALUATED], int realClasses[]);
 int mostSimilarMovement(int nearestIndicator[]);
 void modelEvaluation(void);
-GlobalAverage generalAverageMovement(double data[]); 
+ 

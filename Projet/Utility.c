@@ -92,17 +92,3 @@ int mostSimilarMovement(int nearestIndicator[]) {
     }
     return iMostSimilar;
 }
-
-GlobalAverage generalAverageMovement(double data[]) {
-    GlobalAverage globalAverage; 
-    globalAverage.sum = 0; 
-    int iTenthSecond = 0; 
-
-    while (iTenthSecond < TIME_EVALUATED && data[iTenthSecond] != 0) {
-        globalAverage.sum += data[iTenthSecond];
-        iTenthSecond++; 
-    }
-    globalAverage.realTimeEvaluated = iTenthSecond;
-
-   return globalAverage;
-}

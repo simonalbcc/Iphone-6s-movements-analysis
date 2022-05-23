@@ -1,66 +1,66 @@
 ﻿#include "ClassificationPerformances.h"
 
-int minusDistanceStdClass(double data[], Model models[], int realTimeEvaluated) {
+Indicators indicatorsForAMovement(double data[], Model models[]) {
     double std[NB_TYPE][TIME_EVALUATED];
-    int nearestIndicator[NB_TYPE];
+    int nearestIndicatorStd[NB_TYPE];
+    int nearestIndicatorAverage[NB_TYPE];
+    Indicators indicators;
+
+    double globalAverage = 0;
+    int realTimeEvaluated = 0;
+
+    while (realTimeEvaluated < TIME_EVALUATED && data[realTimeEvaluated] != 0) {
+        globalAverage  += data[realTimeEvaluated];
+        realTimeEvaluated++;
+    }
+    globalAverage /= realTimeEvaluated;
+    double minGlobalAverage = LONG_MAX;
+    int minIModelGlobalAverage = 0;
+    double gapWithModelGlobalAverage;
 
     for (int iModel = 0; iModel < NB_TYPE; iModel++) {
-        nearestIndicator[iModel] = 0;
+        nearestIndicatorStd[iModel] = 0;
+        nearestIndicatorAverage[iModel] = 0;
+
         for (int iTenthSecond = 0; iTenthSecond < realTimeEvaluated; iTenthSecond++) {
             std[iModel][iTenthSecond] = sqrt(pow((data[iTenthSecond] - models[iModel].averages[iTenthSecond]), 2));
         }
+
+        gapWithModelGlobalAverage = gapBetweenTwoNumbers(globalAverage, models[iModel].globalAvg);
+        if (minGlobalAverage > gapWithModelGlobalAverage) {
+            minGlobalAverage = gapWithModelGlobalAverage;
+            minIModelGlobalAverage = iModel;
+        }
     }
 
     for (int iTenthSecond = 0; iTenthSecond < realTimeEvaluated; iTenthSecond++) {
-        double min = LONG_MAX;
-        int minIModel = 0;
+        double minStd = LONG_MAX;
+        double minAverage = LONG_MAX;
+        int minIModelStd = 0;
+        int minIModelAverage = 0;
+
         for (int iModel = 0; iModel < NB_TYPE; iModel++) {
-            double gapWithModel = gapBetweenTwoNumbers(std[iModel][iTenthSecond], models[iModel].stds[iTenthSecond]);
-            if (min > gapWithModel) {
-                min = gapWithModel;
-                minIModel = iModel;
+            double gapWithModelStd = gapBetweenTwoNumbers(std[iModel][iTenthSecond], models[iModel].stds[iTenthSecond]);
+            double gapWithModelAverage  = gapBetweenTwoNumbers(data[iTenthSecond], models[iModel].averages[iTenthSecond]);
+
+            if (minStd > gapWithModelStd) {
+                minStd = gapWithModelStd;
+                minIModelStd = iModel;
+            }
+
+            if (minAverage > gapWithModelAverage) {
+                minAverage = gapWithModelAverage;
+                minIModelAverage = iModel;
             }
         }
-        nearestIndicator[minIModel]++;
+        nearestIndicatorStd[minIModelStd]++;
+        nearestIndicatorAverage[minIModelAverage]++;
     }
-
-    return mostSimilarMovement(nearestIndicator);
-}
-
-int minusDistanceAverages(double data[], Model models[], int realTimeEvaluated) {
-    int nearestIndicator[NB_TYPE];
-
-    for (int iModel = 0; iModel < NB_TYPE; iModel++) {
-        nearestIndicator[iModel] = 0;
-    }
-
-    for (int iTenthSecond = 0; iTenthSecond < realTimeEvaluated; iTenthSecond++) {
-        double min = LONG_MAX;
-        int minIModel = 0;
-        for (int iModel = 0; iModel < NB_TYPE; iModel++) {
-            double gapWithModel = gapBetweenTwoNumbers(data[iTenthSecond],models[iModel].averages[iTenthSecond]);
-            if (min > gapWithModel) {
-                min = gapWithModel;
-                minIModel = iModel;
-            }
-        }
-        nearestIndicator[minIModel]++;
-    }
-
-    return mostSimilarMovement(nearestIndicator);
-}
-
-int minusDistanceGloballAverage(double data, Model models[]) {
-    double min = LONG_MAX;
-    int minIModel = 0;
-    for (int iModel = 0; iModel < NB_TYPE; iModel++) {
-        double gapWithModel = gapBetweenTwoNumbers(data, models[iModel].globalAvg);
-        if (min > gapWithModel) {
-            min = gapWithModel;
-            minIModel = iModel;
-        }
-    }
-    return minIModel;
+    
+    indicators.indicator1 = mostSimilarMovement(nearestIndicatorAverage);
+        indicators.indicator2 = mostSimilarMovement(nearestIndicatorStd);
+        indicators.indicator3 = minIModelGlobalAverage;
+        return indicators;
 }
 
 void initModelsArray(Model models[]) {
@@ -114,27 +114,22 @@ void initMovementsTestAndRealClasses(double movementsTested[NB_TESTS][TIME_EVALU
 }
 
 void initEstimatedClasses(int estimatedClasses[], double movementsTested[][TIME_EVALUATED], Model models[]) {
-    
+    Indicators indicators;
 
     for (int iTest = 0; iTest < NB_TESTS; iTest++) {
 
-        GlobalAverage globalAverage = generalAverageMovement(movementsTested[iTest]);
-           
-        globalAverage.sum /= globalAverage.realTimeEvaluated;
+        indicators = indicatorsForAMovement(movementsTested[iTest], models);
 
-        int ind1 = minusDistanceStdClass(movementsTested[iTest], models, globalAverage.realTimeEvaluated);
-        int ind2 = minusDistanceAverages(movementsTested[iTest], models, globalAverage.realTimeEvaluated);
-        int ind3 = minusDistanceGloballAverage(globalAverage.sum, models);
-
-        if (ind2 == ind3) {
-            estimatedClasses[iTest] = ind2 + 1;
+        if (indicators.indicator2 == indicators.indicator3) {
+            estimatedClasses[iTest] = indicators.indicator2 + 1;
         } else {
-            estimatedClasses[iTest] = ind1 + 1;
+            estimatedClasses[iTest] = indicators.indicator1 + 1;
         }
     }
 }
 
 void modelEvaluation(void) {
+
     double movementsTested[NB_TESTS][TIME_EVALUATED];
     int realClasses[NB_TESTS];
     int estimatedClasses[NB_TESTS];
