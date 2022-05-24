@@ -23,7 +23,6 @@ Indicators indicatorsForAMovement(double data[], Model models[]) {
         nearestIndicatorAverage[iModel] = 0;
 
         for (int iTenthSecond = 0; iTenthSecond < realTimeEvaluated; iTenthSecond++) {
-            //std[iModel][iTenthSecond] = sqrt(pow((data[iTenthSecond] - models[iModel].averages[iTenthSecond]), 2));
             std[iModel][iTenthSecond] = gapBetweenTwoNumbers(data[iTenthSecond], models[iModel].averages[iTenthSecond]); 
         }
 
